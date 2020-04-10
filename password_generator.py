@@ -1,4 +1,4 @@
-# This program generatesa random password for the user
+# This program generates a random password for the user
 from random import choice, randint
 
 
@@ -37,9 +37,6 @@ class PasswordGenerator:
         ]
         self.request_pass_length()
         self.request_amt_letters()
-        self.run_generator()
-
-    def run_generator(self):
         self.generate()
 
     def request_pass_length(self):
@@ -61,9 +58,11 @@ class PasswordGenerator:
             self.run_generator()
 
     def request_amt_letters(self):
-        """ This requests how many letters should be in the password """
+        """ This requests how many letters should be in the Password """
         try:
-            self.how_letters = int(input("How many letters do you want in it? "))
+            self.how_letters = int(
+                input("How many letters do you want in the password? ")
+            )
             if self.how_letters >= self.how_long:
                 print(
                     f"\nSorry letters must be a minimum of {self.how_long - 1} characters."
@@ -75,7 +74,6 @@ class PasswordGenerator:
             print("You can only input a digit!")
             self.request_amt_letters()
 
-    # def generate(self):
     def generate(self):
         """ This generates the pass word """
         how_long = self.how_long
