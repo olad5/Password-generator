@@ -75,28 +75,46 @@ class PasswordGenerator:
             self.request_amt_letters()
 
     def generate(self):
-        """ This generates the pass word """
+        """ This generates the password """
         how_long = self.how_long
         how_letters = self.how_letters
         how_numbers = how_long - how_letters
         password_draft = []
+        letter_pick_list = []
         while how_long > 0:
+
             while how_numbers > 0:
                 num_pick = randint(0, 9)
                 password_draft.append(str(num_pick))
                 how_numbers -= 1
+
             while how_letters > 0:
                 letter_pick = choice(self.alphabets)
-                password_draft.append(letter_pick)
+
+                # this places the random letters in a list to be capitalized or not
+                letter_pick_list.append(letter_pick)
                 how_letters -= 1
+            # this are the lists for the uppercased and lowercased letters
+            upper_letters = letter_pick_list[::2]
+            lower_letters = letter_pick_list[1::2]
+
             how_long -= 1
+
+        # This appends the lowercase and uppercase letters to the password draft list to be randomized
+        for letter in upper_letters:
+            password_draft.append(letter.upper())
+        for letter in lower_letters:
+            password_draft.append(letter.lower())
 
         print(f"This is the password draft => {password_draft}")
         password = ""
+
+        # the password characters are randomized in this code
         while len(password_draft) > 0:
             n = choice(password_draft)
             password += n
             password_draft.remove(n)
+
         print(f"This is the final password => {password}")
 
 
